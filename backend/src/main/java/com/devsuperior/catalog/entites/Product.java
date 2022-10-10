@@ -37,7 +37,7 @@ public class Product implements Serializable{
 			joinColumns = @JoinColumn(name = "product_id"),
 			inverseJoinColumns = @JoinColumn(name = "category_id")
 			)
-	Set<Category> cartegories = new HashSet<>();
+	Set<Category> categories = new HashSet<>();
 	
 	public Product() {
 		
@@ -101,7 +101,7 @@ public class Product implements Serializable{
 	}
 
 	public Set<Category> getCartegories() {
-		return cartegories;
+		return categories;
 	}
 
 	@Override
