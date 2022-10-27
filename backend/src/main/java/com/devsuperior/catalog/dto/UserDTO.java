@@ -4,14 +4,19 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
 import com.devsuperior.catalog.entites.User;
 
 public class UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotEmpty(message = "Campo Obrigatório")
 	private String firstName;
 	private String lastName;
+	@Email(message = "PorFavor colocar um email valido")
 	private String email;
 	private Set<RoleDTO> roles = new HashSet<>();
 
@@ -21,7 +26,7 @@ public UserDTO() {
 	}
 
 	public UserDTO(Long id, String firstName, String lastName, String email) {
-		this.id = id;
+		this.id = id;		
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
