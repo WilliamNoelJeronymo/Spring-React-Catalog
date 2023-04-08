@@ -56,6 +56,7 @@ public class CategoryService {
 	@Transactional
 	public CategoryDTO uptdate(Long id, CategoryDTO dto) {
 		try {
+		@SuppressWarnings("deprecation")
 		Category entity = repository.getOne(id);
 		entity.setName(dto.getName());
 		entity = repository.save(entity);

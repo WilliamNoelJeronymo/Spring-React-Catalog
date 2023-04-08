@@ -78,6 +78,7 @@ public class UserService implements UserDetailsService{
 	@Transactional
 	public UserDTO uptdate(Long id, UserUpdateDTO dto) {
 		try {
+		@SuppressWarnings("deprecation")
 		User entity = repository.getOne(id);
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
@@ -105,6 +106,7 @@ public class UserService implements UserDetailsService{
 		entity.getRoles().clear();
 		
 		for(RoleDTO roleDto : dto.getRoles()) {
+			@SuppressWarnings("deprecation")
 			Role role = roleRepository.getOne(roleDto.getId());
 			entity.getRoles().add(role);
 		}

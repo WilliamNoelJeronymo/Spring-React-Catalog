@@ -38,8 +38,10 @@ public class ProductService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Page<ProductDTO> findAllPaged(Pageable pageable) {
-		Page<Product> list = repository.findAll(pageable);
+	public Page<ProductDTO> findAllPaged(Long categoryId, Pageable pageable, String name) {
+		Optional<Category> category = categoryRepository.findById(categoryId);
+		Category entity = category.orElse(null);
+		Page<Product> list = repository.find(entity,name, pageable);
 		return list.map(x -> new ProductDTO(x));
 	}
 
@@ -62,6 +64,7 @@ public class ProductService {
 	@Transactional
 	public ProductDTO uptdate(Long id, ProductDTO dto) {
 		try {
+		@SuppressWarnings("deprecation")
 		Product entity = repository.getOne(id);
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
@@ -91,6 +94,7 @@ public class ProductService {
 		entity.getCartegories().clear();
 		
 		for(CategoryDTO catDto : dto.getCategories()) {
+			@SuppressWarnings("deprecation")
 			Category category = categoryRepository.getOne(catDto.getId());
 			entity.getCartegories().add(category);
 		}
